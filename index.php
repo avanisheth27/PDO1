@@ -15,6 +15,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 echo "<b>Connected successfully</b>";
+echo "<br><hr>";
 ?>
 </body>
 </html>
