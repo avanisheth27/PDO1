@@ -1,51 +1,31 @@
-
-<html>
-<body>
-
 <?php
+$dsn = 'mysql:dbname=avs44;host=sql2.njit.edu';
+$user = 'avs44';
+$password = 'APcA7GqK';
 
-$servername = "sql2.njit.edu";
-$username = "avs44";
-$password = "APcA7GqK";
-$query="SELECT * from accounts";
+try 
+{
+    $dbh = new PDO($dsn, $user, $password);
+    echo "<b>Connected successfully</b>";
+    echo "<br><hr>";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } 
-echo "<b>Connected successfully</b>";
-echo "<br><hr>";
 
-function runQuery($query) {
- 	global $conn;
-     try {
- 		$q = $conn->prepare($query);
- 		$q->execute();
- 	$results = $q->fetchAll();
- 	$q->closeCursor();
- 		return $results;	
- 	} catch (PDOException $e) {
- 		http_error("500 Internal Server Error\n\n"."There was a SQL error:\n\n" . $e->getMessage());
- 	}	  
- }
+catch (PDOException $e) 
+{
+  echo 'Connection failed: ' . $e->getMessage();
+}
 
-/*$sql = "SELECT * from accounts";
-$result = $conn->query($sql);
+$sql = "Select * from accounts";
 
-try {
-  
-$conn->exec($sql);
-} catch (PDOException $e) {
-echo $result1 . "<br>" ;
-
-}*/
-
+try 
+{
+  $dbh->exec($sql);
+} 
+catch (PDOException $e) 
+{
+echo $sql . "<br>" . $e->getMessage();
+}
 echo 'done';
-$conn->close();
 ?>
-</body>
-</html>
-
