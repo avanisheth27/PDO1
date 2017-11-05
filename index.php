@@ -16,10 +16,10 @@ catch (PDOException $e)
   echo 'Connection failed: ' . $e->getMessage();
 }
 try {
-    $stmt = $dbh->prepare("SELECT * FROM accounts where id<6");
-    $stmt->execute();
-    $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-    $result = $stmt->fetchAll();
+    $query1 = $dbh->prepare("SELECT * FROM accounts where id<6");
+    $query1->execute();
+    $result = $query1->setFetchMode(PDO::FETCH_ASSOC);
+    $result = $query1->fetchAll();
     //print_r($result);
     
     }
@@ -32,6 +32,7 @@ Print_r(count($result));
 echo '<br><hr>';
 
    //Print_r($result);
+
 
  
  ?>
